@@ -4,8 +4,13 @@ declare(strict_types=1);
 namespace DWenzel\ReporterApi;
 
 use DWenzel\ReporterApi\Endpoint\EndpointInterface;
+use DWenzel\ReporterApi\Endpoint\NullEndpoint;
 use DWenzel\ReporterApi\Endpoint\Report;
 use DWenzel\ReporterApi\Exception\InvalidClass;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /***************************************************************
@@ -24,8 +29,11 @@ use Psr\Http\Server\RequestHandlerInterface;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Api
+class Api implements MiddlewareInterface
 {
+
+    public const DEFAULT_ROUTE = '/reporter/1.0.0/application/report/';
+
 
     /**
      * @var string
@@ -44,6 +52,10 @@ class Api
      * @var string
      */
     protected $lang = 'en';
+
+    protected $endpointMap = [
+        self::DEFAULT_ROUTE => Report::class
+    ];
 
     /**
      * @var array
@@ -71,6 +83,17 @@ class Api
     }
 
     /**
+     * Tells whether the Api can handle the request
+     *
+     * @param RequestInterface $request
+     * @return bool
+     */
+    public function canHandle(RequestInterface $request)
+    {
+        return !($this->determineEndpoint($request)  instanceof NullEndpoint);
+    }
+
+    /**
      * @param $className
      * @return EndpointInterface
      * @throws InvalidClass
@@ -90,5 +113,41 @@ class Api
             $this->endpointCache[$className] = new $className($this->client);
         }
         return $this->endpointCache[$className];
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return EndpointInterface|NullEndpoint
+     */
+    protected function determineEndpoint(RequestInterface $request)
+    {
+        $uri = $request->getUri();
+        $path = $uri->getPath();
+        if (array_key_exists($path, $this->endpointMap)) {
+            try {
+                return $this->getInstance($this->endpointMap[$path]);
+            } catch (InvalidClass $e) {
+                return new NullEndpoint();
+            }
+        }
+
+        return new NullEndpoint();
+    }
+
+    /**
+     * Process an incoming server request.
+     *
+     * Processes an incoming server request in order to produce a response.
+     * If unable to produce the response itself, it may delegate to the provided
+     * request handler to do so.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        if (($endpoint = $this->determineEndpoint($request)) instanceof NullEndpoint)
+        {
+            return $handler->handle($request);
+        }
+
+        return $endpoint->handle($request);
     }
 }

@@ -1,10 +1,8 @@
 <?php
+declare(strict_types = 1);
+namespace DWenzel\ReporterApi\Http;
 
-namespace DWenzel\ReporterApi\Endpoint;
-
-use Bitty\Http\JsonResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Bitty\Http\Response;
 
 /***************************************************************
  *  Copyright notice
@@ -22,19 +20,6 @@ use Psr\Http\Message\ServerRequestInterface;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Report implements EndpointInterface
+class NullResponse extends Response
 {
-    /**
-     * Handles a request and produces a response.
-     *
-     * May call other collaborating code to generate the response.
-     */
-    public function handle(ServerRequestInterface $request): ResponseInterface
-    {
-        $report = new \DWenzel\ReporterApi\Schema\Report();
-        $body = serialize($report);
-        return new JsonResponse(
-            $body
-        );
-    }
 }

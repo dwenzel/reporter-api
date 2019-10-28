@@ -2,6 +2,8 @@
 
 namespace DWenzel\ReporterApi\Endpoint;
 
+use Psr\Http\Server\RequestHandlerInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -18,7 +20,7 @@ namespace DWenzel\ReporterApi\Endpoint;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-interface EndpointInterface
+interface EndpointInterface extends RequestHandlerInterface
 {
 
 }

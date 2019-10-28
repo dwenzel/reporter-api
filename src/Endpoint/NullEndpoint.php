@@ -2,7 +2,7 @@
 
 namespace DWenzel\ReporterApi\Endpoint;
 
-use Bitty\Http\JsonResponse;
+use DWenzel\ReporterApi\Http\NullResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,8 +22,9 @@ use Psr\Http\Message\ServerRequestInterface;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Report implements EndpointInterface
+class NullEndpoint implements EndpointInterface
 {
+
     /**
      * Handles a request and produces a response.
      *
@@ -31,10 +32,6 @@ class Report implements EndpointInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $report = new \DWenzel\ReporterApi\Schema\Report();
-        $body = serialize($report);
-        return new JsonResponse(
-            $body
-        );
+        return new NullResponse("Bad Request", 400);
     }
 }

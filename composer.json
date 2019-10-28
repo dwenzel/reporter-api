@@ -17,7 +17,9 @@
   "require": {
     "cpsit/auditor": "~0.4",
     "web-token/jwt-framework": "^2.0",
-    "bittyphp/http": "^2.1"
+    "bittyphp/http": "^2.1",
+    "ext-json": "*",
+    "ext-http": "*"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

@@ -19,7 +19,8 @@
     "web-token/jwt-framework": "^2.0",
     "bittyphp/http": "^2.1",
     "ext-json": "*",
-    "ext-http": "*"
+    "ext-http": "*",
+    "myclabs/php-enum": "^1.7"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",

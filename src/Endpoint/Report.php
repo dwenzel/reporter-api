@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace DWenzel\ReporterApi\Endpoint;
 
@@ -6,7 +7,6 @@ use Bitty\Http\JsonResponse;
 use CPSIT\Auditor\BundleDescriber;
 use CPSIT\Auditor\Reflection\PackageVersions;
 use DWenzel\ReporterApi\Schema\Package;
-use DWenzel\ReporterApi\Schema\PackageSource;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use DWenzel\ReporterApi\Schema\Report as ReportSchema;
@@ -44,7 +44,14 @@ class Report implements EndpointInterface
         return new JsonResponse($report->jsonSerialize());
     }
 
-    protected function getPackages()
+    /**
+     * Read the installed packages
+     *
+     * Returns an array of Schema/Package objects
+     *
+     * @return array
+     */
+    protected function getPackages(): array
     {
         $packages = [];
 

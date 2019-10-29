@@ -3,7 +3,7 @@
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\Report;
-use DWenzel\Reporter\Domain\Model\ApplicationStatus;
+use DWenzel\ReporterApi\Schema\ApplicationStatus;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /***************************************************************
@@ -54,7 +54,7 @@ class ReportTest extends UnitTestCase
     {
         $this->assertTrue(
             $this->subject->getStatus()
-                ->equals(ApplicationStatus::UNKNOWNN)
+                ->equals(ApplicationStatus::UNKNOWN)
         );
     }
 

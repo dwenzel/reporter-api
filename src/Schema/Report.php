@@ -2,7 +2,7 @@
 
 namespace DWenzel\ReporterApi\Schema;
 
-use DWenzel\Reporter\Domain\Model\ApplicationStatus;
+use DWenzel\ReporterApi\Schema\ApplicationStatus;
 use DWenzel\ReporterApi\Traits\JsonSerialize;
 use DWenzel\ReporterApi\Traits\ToArray;
 use JsonSerializable;
@@ -27,7 +27,7 @@ class Report implements JsonSerializable
 {
     use ToArray, JsonSerialize;
 
-    protected const SERIALIZABLE_PROPERTIES = [
+    public const SERIALIZABLE_PROPERTIES = [
         'status' ,
         'packages' ,
         'repositories' ,
@@ -46,7 +46,7 @@ class Report implements JsonSerializable
 
     public function __construct()
     {
-        $this->status = ApplicationStatus::cast(ApplicationStatus::UNKNOWNN);
+        $this->status = new ApplicationStatus(ApplicationStatus::UNKNOWN);
     }
 
     /**

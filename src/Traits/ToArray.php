@@ -65,8 +65,8 @@ trait ToArray
     {
         if(is_iterable($value)) {
             $result = [];
-            foreach ($value as $item) {
-                $result[] = $this->valueToArray($item, $treeDepth-1, $mapping);
+            foreach ($value as $key => $item) {
+                $result[$key] = $this->valueToArray($item, $treeDepth-1, $mapping);
             }
             return $result;
         }

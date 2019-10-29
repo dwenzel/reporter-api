@@ -69,21 +69,21 @@ class ReportTest extends UnitTestCase
         );
     }
 
-    public function testGetComponentsInitiallyReturnsEmptyArray(): void
+    public function testGetPackagesInitiallyReturnsEmptyArray(): void
     {
         $this->assertSame(
             [],
-            $this->subject->getComponents()
+            $this->subject->getPackages()
         );
     }
 
-    public function testComponentsCanBeSet(): void
+    public function testPackagesCanBeSet(): void
     {
-        $components = ['foo'];
-        $this->subject->setComponents($components);
+        $packages = ['foo'];
+        $this->subject->setPackages($packages);
         $this->assertSame(
-            $components,
-            $this->subject->getComponents()
+            $packages,
+            $this->subject->getPackages()
         );
     }
 

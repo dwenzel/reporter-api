@@ -20,5 +20,92 @@ namespace DWenzel\ReporterApi\Schema;
  ***************************************************************/
 class Package
 {
+    /**
+     * @var string
+     */
+    protected $name = '';
 
+    /**
+     * @var string
+     */
+    protected $version = '';
+
+    /**
+     * @var string
+     */
+    protected $type = '';
+
+    /**
+     * @var PackageSource
+     */
+    protected $source;
+
+    public function __construct()
+    {
+        $this->source = new NullPackageSource();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion(): string
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param string $version
+     */
+    public function setVersion(string $version): void
+    {
+        $this->version = $version;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return PackageSource
+     */
+    public function getSource(): PackageSource
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param PackageSource $source
+     */
+    public function setSource(PackageSource $source): void
+    {
+        $this->source = $source;
+    }
 }

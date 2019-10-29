@@ -2,8 +2,6 @@
 
 namespace DWenzel\ReporterApi\Schema;
 
-use DWenzel\ReporterApi\Traits\JsonSerialize;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -20,54 +18,20 @@ use DWenzel\ReporterApi\Traits\JsonSerialize;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Category
+final class NullPackageSource extends PackageSource
 {
-    use JsonSerialize;
-
-    protected const SERIALIZABLE_PROPERTIES = [
-        'id',
-        'name'
-    ];
-
-    /**
-     * @var int
-     */
-    protected $id = 0;
-
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * @return int
-     */
-    public function getId(): int
+    final public function getReference(): string
     {
-        return $this->id;
+        return '';
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
+    final public function getUrl(): string
     {
-        $this->id = $id;
+        return '';
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
+    final public function getType(): string
     {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
+        return '';
     }
 }

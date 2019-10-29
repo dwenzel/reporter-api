@@ -3,6 +3,8 @@
 namespace DWenzel\ReporterApi\Schema;
 
 use DWenzel\Reporter\Domain\Model\ApplicationStatus;
+use DWenzel\ReporterApi\Traits\JsonSerialize;
+use JsonSerializable;
 
 /***************************************************************
  *  Copyright notice
@@ -20,8 +22,16 @@ use DWenzel\Reporter\Domain\Model\ApplicationStatus;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Report
+class Report implements JsonSerializable
 {
+    use JsonSerialize;
+
+    protected const SERIALIZABLE_PROPERTIES = [
+        'status' ,
+        'components' ,
+        'repositories' ,
+        'tags'
+    ];
     protected $applicationId = 0;
     protected $name = '';
 
@@ -29,7 +39,7 @@ class Report
      * @var ApplicationStatus
      */
     protected $status;
-    protected $components = [];
+    protected $packages = [];
     protected $repositories = [];
     protected $tags = [];
 
@@ -49,9 +59,11 @@ class Report
     /**
      * @param int $applicationId
      */
-    public function setApplicationId(int $applicationId): void
+    public function setApplicationId(int $applicationId): Report
     {
         $this->applicationId = $applicationId;
+
+        return $this;
     }
 
     /**
@@ -64,10 +76,13 @@ class Report
 
     /**
      * @param string $name
+     * @return Report
      */
-    public function setName(string $name): void
+    public function setName(string $name): Report
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -80,26 +95,32 @@ class Report
 
     /**
      * @param ApplicationStatus $status
+     * @return Report
      */
-    public function setStatus(ApplicationStatus $status): void
+    public function setStatus(ApplicationStatus $status): Report
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
      * @return array
      */
-    public function getComponents(): array
+    public function getPackages(): array
     {
-        return $this->components;
+        return $this->packages;
     }
 
     /**
-     * @param array $components
+     * @param array $packages
+     * @return Report
      */
-    public function setComponents(array $components): void
+    public function setPackages(array $packages): Report
     {
-        $this->components = $components;
+        $this->packages = $packages;
+
+        return $this;
     }
 
     /**
@@ -112,9 +133,37 @@ class Report
 
     /**
      * @param array $repositories
+     * @return Report
      */
-    public function setRepositories(array $repositories): void
+    public function setRepositories(array $repositories): Report
     {
         $this->repositories = $repositories;
+
+        return $this;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>
+     */
+    public function jsonSerialize()
+    {
+        $data = [];
+        foreach(static::SERIALIZABLE_PROPERTIES as $name){
+            $value = '';
+            if (is_string($this->{$name})) {
+                $value = $this->{$name};
+            }
+            if (is_int($this->{$name})) {
+                $value = (string)$this->{$name};
+            }
+            if ($this->{$name} instanceof JsonSerializable) {
+                $value = $this->{$name}->jsonSerialize();
+            }
+            $data[$name] = $value;
+        }
+
+        return $data;
     }
 }

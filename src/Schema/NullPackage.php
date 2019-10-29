@@ -18,40 +18,25 @@ namespace DWenzel\ReporterApi\Schema;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Component
+final class NullPackage extends  Package
 {
-    protected $id = '';
-    protected $name = '';
-
-    /**
-     * @return string
-     */
-    public function getId(): string
+    final public function getName(): string
     {
-        return $this->id;
+        return '';
     }
 
-    /**
-     * @param string $id
-     */
-    public function setId(string $id): void
+    final public function getType(): string
     {
-        $this->id = $id;
+        return '';
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
+    final public function getSource(): PackageSource
     {
-        return $this->name;
+        return new NullPackageSource();
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
+    final public function getVersion(): string
     {
-        $this->name = $name;
+        return '';
     }
 }

@@ -2,6 +2,9 @@
 
 namespace DWenzel\ReporterApi\Schema;
 
+use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -20,6 +23,15 @@ namespace DWenzel\ReporterApi\Schema;
  ***************************************************************/
 class Package
 {
+    use ToArray, JsonSerialize;
+
+    const SERIALIZABLE_PROPERTIES = [
+        'name',
+        'version',
+        'type',
+        'sourceReference',
+        'source'
+    ];
     /**
      * @var string
      */
@@ -36,13 +48,26 @@ class Package
     protected $type = '';
 
     /**
+     * @var string
+     */
+    protected $sourceReference = '';
+
+    /**
      * @var PackageSource
      */
     protected $source;
 
-    public function __construct()
+    public function __construct(
+        string $name = '',
+        string $version = '',
+        string $sourceReference = '',
+        PackageSource $source = null
+    )
     {
-        $this->source = new NullPackageSource();
+        $this->name = $name;
+        $this->version = $version;
+        $this->sourceReference = $sourceReference;
+        $this->source = ($source) ? $source : new NullPackageSource();
     }
 
     /**
@@ -107,5 +132,21 @@ class Package
     public function setSource(PackageSource $source): void
     {
         $this->source = $source;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceReference(): string
+    {
+        return $this->sourceReference;
+    }
+
+    /**
+     * @param string $sourceReference
+     */
+    public function setSourceReference(string $sourceReference): void
+    {
+        $this->sourceReference = $sourceReference;
     }
 }

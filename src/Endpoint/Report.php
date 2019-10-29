@@ -5,6 +5,8 @@ namespace DWenzel\ReporterApi\Endpoint;
 use Bitty\Http\JsonResponse;
 use CPSIT\Auditor\BundleDescriber;
 use CPSIT\Auditor\Reflection\PackageVersions;
+use DWenzel\ReporterApi\Schema\Package;
+use DWenzel\ReporterApi\Schema\PackageSource;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use DWenzel\ReporterApi\Schema\Report as ReportSchema;
@@ -37,12 +39,24 @@ class Report implements EndpointInterface
         $report = new ReportSchema();
         $report->setRepositories(BundleDescriber::getProperty('repositories'))
             ->setName(BundleDescriber::getProperty('uniqueName'))
-            ->setPackages(PackageVersions::getAll());
+            ->setPackages($this->getPackages());
 
-        $data = $report->jsonSerialize();
-        $body = json_encode($data, JSON_FORCE_OBJECT);
-        return new JsonResponse(
-            $body
-        );
+        return new JsonResponse($report->jsonSerialize());
+    }
+
+    protected function getPackages()
+    {
+        $packages = [];
+
+        /** @var \CPSIT\Auditor\Dto\Package $package */
+        foreach (PackageVersions::getAll() as $package) {
+            $packages[] = new Package(
+                $package->getName(),
+                $package->getVersion(),
+                $package->getSourceReference()
+            );
+        }
+
+        return $packages;
     }
 }

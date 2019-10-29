@@ -22,6 +22,15 @@ use JsonSerializable;
  ***************************************************************/
 trait JsonSerialize
 {
+    /**
+     * Returns an array representation of the object
+     *
+     * @param integer $depth maximum tree depth
+     * @param array $mapping An array with keys for each model
+     * which should be mapped.
+     * @return array
+     */
+    abstract public function toArray(int $dept = 100, array $mapping = null);
 
     /**
      * Specify data which should be serialized to JSON
@@ -30,25 +39,6 @@ trait JsonSerialize
      */
     public function jsonSerialize()
     {
-        $data = [];
-        foreach (static::SERIALIZABLE_PROPERTIES as $name) {
-            $value = '';
-            if (is_string($this->{$name})) {
-                $value = $this->{$name};
-            }
-            if (is_int($this->{$name})) {
-                $value = (string)$this->{$name};
-            }
-            if ($this->{$name} instanceof JsonSerializable) {
-                $value = $this->{$name}->jsonSerialize();
-            }
-            if (is_array($this->{$name})) {
-                $value = $this->{$name};
-            }
-            $data[$name] = $value;
-        }
-
-        return $data;
+        return $this->toArray();
     }
-
 }

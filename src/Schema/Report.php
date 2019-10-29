@@ -4,6 +4,7 @@ namespace DWenzel\ReporterApi\Schema;
 
 use DWenzel\Reporter\Domain\Model\ApplicationStatus;
 use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
 use JsonSerializable;
 
 /***************************************************************
@@ -24,11 +25,11 @@ use JsonSerializable;
  ***************************************************************/
 class Report implements JsonSerializable
 {
-    use JsonSerialize;
+    use ToArray, JsonSerialize;
 
     protected const SERIALIZABLE_PROPERTIES = [
         'status' ,
-        'components' ,
+        'packages' ,
         'repositories' ,
         'tags'
     ];
@@ -140,30 +141,5 @@ class Report implements JsonSerializable
         $this->repositories = $repositories;
 
         return $this;
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>
-     */
-    public function jsonSerialize()
-    {
-        $data = [];
-        foreach(static::SERIALIZABLE_PROPERTIES as $name){
-            $value = '';
-            if (is_string($this->{$name})) {
-                $value = $this->{$name};
-            }
-            if (is_int($this->{$name})) {
-                $value = (string)$this->{$name};
-            }
-            if ($this->{$name} instanceof JsonSerializable) {
-                $value = $this->{$name}->jsonSerialize();
-            }
-            $data[$name] = $value;
-        }
-
-        return $data;
     }
 }

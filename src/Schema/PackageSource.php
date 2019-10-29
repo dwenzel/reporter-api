@@ -2,6 +2,9 @@
 
 namespace DWenzel\ReporterApi\Schema;
 
+use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -20,6 +23,14 @@ namespace DWenzel\ReporterApi\Schema;
  ***************************************************************/
 class PackageSource
 {
+    use ToArray, JsonSerialize;
+
+    const SERIALIZABLE_PROPERTIES = [
+        'url',
+        'type',
+        'reference'
+    ];
+
     /**
      * @var string
      */
@@ -34,6 +45,13 @@ class PackageSource
      * @var string
      */
     protected $reference = '';
+
+    public function __construct(string $url = '', string $type = '', string $reference = '')
+    {
+        $this->url = $url;
+        $this->type = $type;
+        $this->reference = $reference;
+    }
 
     /**
      * @return string

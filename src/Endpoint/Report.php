@@ -3,8 +3,11 @@
 namespace DWenzel\ReporterApi\Endpoint;
 
 use Bitty\Http\JsonResponse;
+use CPSIT\Auditor\BundleDescriber;
+use CPSIT\Auditor\Reflection\PackageVersions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use DWenzel\ReporterApi\Schema\Report as ReportSchema;
 
 /***************************************************************
  *  Copyright notice
@@ -31,8 +34,13 @@ class Report implements EndpointInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $report = new \DWenzel\ReporterApi\Schema\Report();
-        $body = serialize($report);
+        $report = new ReportSchema();
+        $report->setRepositories(BundleDescriber::getProperty('repositories'))
+            ->setName(BundleDescriber::getProperty('uniqueName'))
+            ->setPackages(PackageVersions::getAll());
+
+        $data = $report->jsonSerialize();
+        $body = json_encode($data, JSON_FORCE_OBJECT);
         return new JsonResponse(
             $body
         );

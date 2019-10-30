@@ -63,6 +63,9 @@ trait ToArray
      */
     protected function valueToArray($value, $treeDepth = 100, $mapping = null)
     {
+        if ($value instanceof \JsonSerializable) {
+            return $value->jsonSerialize();
+        }
         if(is_iterable($value)) {
             $result = [];
             foreach ($value as $key => $item) {

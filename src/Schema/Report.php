@@ -28,6 +28,8 @@ class Report implements JsonSerializable
     use ToArray, JsonSerialize;
 
     public const SERIALIZABLE_PROPERTIES = [
+        'applicationId',
+        'name',
         'status' ,
         'packages' ,
         'repositories' ,

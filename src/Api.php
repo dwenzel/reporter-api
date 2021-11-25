@@ -34,25 +34,6 @@ class Api implements MiddlewareInterface
 
     public const DEFAULT_ROUTE = '/reporter/1.0.0/application/report/';
 
-
-    /**
-     * @var string
-     */
-    protected $apiKey = '';
-    /**
-     * @var string
-     */
-    protected $secret = '';
-    /**
-     * @var string
-     */
-    protected $site = '';
-
-    /**
-     * @var string
-     */
-    protected $lang = 'en';
-
     protected $endpointMap = [
         self::DEFAULT_ROUTE => Report::class
     ];
@@ -62,14 +43,7 @@ class Api implements MiddlewareInterface
      */
     private $endpointCache = [];
 
-    public function __construct(
-        string $apiKey,
-        string $secret,
-        RequestHandlerInterface $handler,
-        string $site = null,
-        string $lang = 'en',
-        array $config = []
-    )
+    public function __construct()
     {
     }
 

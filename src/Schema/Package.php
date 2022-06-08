@@ -28,9 +28,7 @@ class Package
     const SERIALIZABLE_PROPERTIES = [
         'name',
         'version',
-        'type',
-        'sourceReference',
-        'source'
+        'sourceReference'
     ];
     /**
      * @var string
@@ -52,22 +50,14 @@ class Package
      */
     protected $sourceReference = '';
 
-    /**
-     * @var PackageSource
-     */
-    protected $source;
-
     public function __construct(
         string $name = '',
         string $version = '',
-        string $sourceReference = '',
-        PackageSource $source = null
-    )
+        string $sourceReference = '')
     {
         $this->name = $name;
         $this->version = $version;
         $this->sourceReference = $sourceReference;
-        $this->source = ($source) ? $source : new NullPackageSource();
     }
 
     /**

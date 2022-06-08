@@ -106,10 +106,6 @@ components:
           type: string
         version:
           type: string
-        type:
-          type: string
-        source:
-          $ref: '#/components/schemas/PackageSource'
     PackageSource:
       type: array
       properties:

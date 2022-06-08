@@ -32,7 +32,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Api implements MiddlewareInterface
 {
 
-    public const DEFAULT_ROUTE = '/reporter/1.0.0/application/report/';
+    public const DEFAULT_ROUTE = '/api/reporter/v1/application/report';
 
     protected $endpointMap = [
         self::DEFAULT_ROUTE => Report::class

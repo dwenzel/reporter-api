@@ -52,15 +52,15 @@ class ReportTest extends UnitTestCase
 
     public function testGetStatusInitiallyReturnsApplicationStatusUnknown(): void
     {
-        $this->assertTrue(
-            $this->subject->getStatus()
-                ->equals(ApplicationStatus::UNKNOWN)
+        $this->assertSame(
+            $this->subject->getStatus()->getValue(),
+            ApplicationStatus::UNKNOWN
         );
     }
 
     public function testApplicationStatusCanBeSet(): void
     {
-        $status = ApplicationStatus::cast(ApplicationStatus::OK);
+        $status = ApplicationStatus::from(ApplicationStatus::OK);
         $this->subject->setStatus($status);
 
         $this->assertSame(

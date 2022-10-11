@@ -3,6 +3,7 @@
 namespace DWenzel\ReporterApi\Schema;
 
 use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
 
 /***************************************************************
  *  Copyright notice
@@ -22,7 +23,7 @@ use DWenzel\ReporterApi\Traits\JsonSerialize;
  ***************************************************************/
 class Category
 {
-    use JsonSerialize;
+    use JsonSerialize, ToArray;
 
     protected const SERIALIZABLE_PROPERTIES = [
         'id',

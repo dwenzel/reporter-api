@@ -50,6 +50,8 @@ class Package
      */
     protected $sourceReference = '';
 
+    protected $source;
+
     public function __construct(
         string $name = '',
         string $version = '',
@@ -58,6 +60,7 @@ class Package
         $this->name = $name;
         $this->version = $version;
         $this->sourceReference = $sourceReference;
+        $this->source = new NullPackageSource();
     }
 
     /**

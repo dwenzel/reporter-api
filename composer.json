@@ -16,6 +16,7 @@
     }
   ],
   "require": {
+    "php": ">=8.1",
     "cpsit/auditor": "~0.4",
     "web-token/jwt-framework": "^3.1",
     "bittyphp/http": "^2.1",

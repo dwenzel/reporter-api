@@ -2,8 +2,6 @@
 declare(strict_types = 1);
 namespace DWenzel\ReporterApi\Http;
 
-use Bitty\Http\Response;
-
 /***************************************************************
  *  Copyright notice
  *

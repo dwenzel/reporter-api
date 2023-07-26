@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace DWenzel\ReporterApi\Endpoint;
 
-use Bitty\Http\JsonResponse;
+use DWenzel\ReporterApi\Http\JsonResponse;
 use CPSIT\Auditor\BundleDescriber;
 use CPSIT\Auditor\Reflection\PackageVersions;
 use DWenzel\ReporterApi\Schema\Package;

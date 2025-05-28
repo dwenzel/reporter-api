@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Schema;
+
+use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
 
 /***************************************************************
  *  Copyright notice
@@ -18,4 +23,38 @@ namespace DWenzel\ReporterApi\Schema;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Tag {}
+class Tag
+{
+    use ToArray;
+    use JsonSerialize;
+
+    public const SERIALIZABLE_PROPERTIES = [
+        'id',
+        'name',
+    ];
+
+    public function __construct(
+        protected int $id = 0,
+        protected string $name = ''
+    ) {}
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+}

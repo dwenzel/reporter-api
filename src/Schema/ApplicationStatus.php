@@ -1,8 +1,8 @@
 <?php
 
-namespace DWenzel\ReporterApi\Schema;
+declare(strict_types=1);
 
-use MyCLabs\Enum\Enum;
+namespace DWenzel\ReporterApi\Schema;
 
 /***************************************************************
  *  Copyright notice
@@ -21,11 +21,20 @@ use MyCLabs\Enum\Enum;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ApplicationStatus extends Enum
+enum ApplicationStatus: string
 {
-    public const __default = self::UNKNOWN;
-    public const UNKNOWN = 'unknown';
-    public const OK = 'ok';
-    public const ERROR = 'error';
-    public const WARNING = 'warning';
+    case UNKNOWN = 'unknown';
+    case OK = 'ok';
+    case ERROR = 'error';
+    case WARNING = 'warning';
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public static function default(): self
+    {
+        return self::UNKNOWN;
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Schema;
 
 use DWenzel\ReporterApi\Traits\JsonSerialize;
@@ -34,33 +36,23 @@ class Report implements \JsonSerializable
         'repositories' ,
         'tags',
     ];
-    protected $applicationId = 0;
-    protected $name = '';
-
-    /**
-     * @var ApplicationStatus
-     */
-    protected $status;
-    protected $packages = [];
-    protected $repositories = [];
-    protected $tags = [];
+    protected int $applicationId = 0;
+    protected string $name = '';
+    protected ApplicationStatus $status;
+    protected array $packages = [];
+    protected array $repositories = [];
+    protected array $tags = [];
 
     public function __construct()
     {
-        $this->status = new ApplicationStatus(ApplicationStatus::UNKNOWN);
+        $this->status = ApplicationStatus::UNKNOWN;
     }
 
-    /**
-     * @return int
-     */
     public function getApplicationId(): int
     {
         return $this->applicationId;
     }
 
-    /**
-     * @param int $applicationId
-     */
     public function setApplicationId(int $applicationId): Report
     {
         $this->applicationId = $applicationId;
@@ -68,18 +60,11 @@ class Report implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Report
-     */
     public function setName(string $name): Report
     {
         $this->name = $name;
@@ -87,18 +72,11 @@ class Report implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return
-     */
     public function getStatus(): ApplicationStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param ApplicationStatus $status
-     * @return Report
-     */
     public function setStatus(ApplicationStatus $status): Report
     {
         $this->status = $status;
@@ -106,18 +84,11 @@ class Report implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getPackages(): array
     {
         return $this->packages;
     }
 
-    /**
-     * @param array $packages
-     * @return Report
-     */
     public function setPackages(array $packages): Report
     {
         $this->packages = $packages;
@@ -125,18 +96,11 @@ class Report implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getRepositories(): array
     {
         return $this->repositories;
     }
 
-    /**
-     * @param array $repositories
-     * @return Report
-     */
     public function setRepositories(array $repositories): Report
     {
         $this->repositories = $repositories;

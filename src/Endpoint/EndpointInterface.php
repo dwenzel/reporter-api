@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Endpoint;
 
 use Psr\Http\Server\RequestHandlerInterface;

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\Category;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -21,14 +23,11 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class CategoryTest extends UnitTestCase
+class CategoryTest extends TestCase
 {
-    /**
-     * @var Category
-     */
-    protected $subject;
+    private Category $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Category();
     }

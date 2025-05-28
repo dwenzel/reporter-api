@@ -34,43 +34,25 @@ class Api implements MiddlewareInterface
 {
     public const DEFAULT_ROUTE = '/api/reporter/v1/application/report';
 
-    protected $endpointMap = [
+    protected array $endpointMap = [
         self::DEFAULT_ROUTE => Report::class,
     ];
 
-    /**
-     * @var array
-     */
-    private $endpointCache = [];
+    private array $endpointCache = [];
 
     public function __construct() {}
 
-    /**
-     * @return mixed
-     * @throws InvalidClass
-     */
-    public function getReportEndpoint()
+    public function getReportEndpoint(): EndpointInterface
     {
         return $this->getInstance(Report::class);
     }
 
-    /**
-     * Tells whether the Api can handle the request
-     *
-     * @param RequestInterface $request
-     * @return bool
-     */
-    public function canHandle(RequestInterface $request)
+    public function canHandle(RequestInterface $request): bool
     {
         return !($this->determineEndpoint($request)  instanceof NullEndpoint);
     }
 
-    /**
-     * @param $className
-     * @return EndpointInterface
-     * @throws InvalidClass
-     */
-    private function getInstance($className)
+    private function getInstance(string $className): EndpointInterface
     {
         if (!in_array(EndpointInterface::class, class_implements($className), true)) {
             $message = 'Invalid class %s. Class must implement ' . EndpointInterface::class . '.';
@@ -81,16 +63,12 @@ class Api implements MiddlewareInterface
 
         }
         if (!array_key_exists($className, $this->endpointCache)) {
-            $this->endpointCache[$className] = new $className($this->client);
+            $this->endpointCache[$className] = new $className();
         }
         return $this->endpointCache[$className];
     }
 
-    /**
-     * @param RequestInterface $request
-     * @return EndpointInterface|NullEndpoint
-     */
-    protected function determineEndpoint(RequestInterface $request)
+    protected function determineEndpoint(RequestInterface $request): EndpointInterface
     {
         $uri = $request->getUri();
         $path = $uri->getPath();

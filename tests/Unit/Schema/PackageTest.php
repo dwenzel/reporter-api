@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\NullPackageSource;
 use DWenzel\ReporterApi\Schema\Package;
 use DWenzel\ReporterApi\Schema\PackageSource;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -23,14 +25,11 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class PackageTest extends UnitTestCase
+class PackageTest extends TestCase
 {
-    /**
-     * @var Package
-     */
-    protected $subject;
+    private Package $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Package();
     }

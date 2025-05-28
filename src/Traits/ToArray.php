@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Traits;
 
 /**
@@ -15,17 +17,17 @@ trait ToArray
      * which should be mapped.
      * @return array
      */
-    public function toArray($depth = 100, $mapping = null)
+    public function toArray(int $depth = 100, ?array $mapping = null): array
     {
         if ($depth < 1) {
-            return null;
+            return [];
         }
         $depth = $depth - 1;
         $className = static::class;
         $properties = $this->getSerializableProperties($className);
         $result = [];
         foreach ($properties as $propertyName => $propertyValue) {
-            $maxDept = $depth;
+            $maxDepth = $depth;
 
             $hasMapping = false;
             if ((bool)$mapping) {
@@ -38,11 +40,11 @@ trait ToArray
                     continue;
                 }
 
-                if (isset($mapping[$className][$propertyName]['maxDept'])) {
-                    $maxDept = $mapping[$className][$propertyName]['maxDept'];
+                if (isset($mapping[$className][$propertyName]['maxDepth'])) {
+                    $maxDepth = $mapping[$className][$propertyName]['maxDepth'];
                 }
             }
-            $result[$propertyName] = $this->valueToArray($propertyValue, $maxDept, $mapping);
+            $result[$propertyName] = $this->valueToArray($propertyValue, $maxDepth, $mapping);
         }
 
         return $result;
@@ -59,7 +61,7 @@ trait ToArray
      * @internal param int $treeDepth maximum tree depth, default 100
      * @var array $mapping An array with mapping rules
      */
-    protected function valueToArray($value, $treeDepth = 100, $mapping = null)
+    protected function valueToArray(mixed $value, int $treeDepth = 100, ?array $mapping = null): mixed
     {
         if ($value instanceof \JsonSerializable) {
             return $value->jsonSerialize();

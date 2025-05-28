@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\ApplicationStatus;
 use DWenzel\ReporterApi\Schema\Report;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -22,14 +24,11 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class ReportTest extends UnitTestCase
+class ReportTest extends TestCase
 {
-    /**
-     * @var Report
-     */
-    protected $subject;
+    private Report $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Report();
     }
@@ -53,14 +52,14 @@ class ReportTest extends UnitTestCase
     public function testGetStatusInitiallyReturnsApplicationStatusUnknown(): void
     {
         self::assertSame(
-            $this->subject->getStatus()->getValue(),
-            ApplicationStatus::UNKNOWN
+            ApplicationStatus::UNKNOWN,
+            $this->subject->getStatus()
         );
     }
 
     public function testApplicationStatusCanBeSet(): void
     {
-        $status = ApplicationStatus::from(ApplicationStatus::OK);
+        $status = ApplicationStatus::OK;
         $this->subject->setStatus($status);
 
         self::assertSame(

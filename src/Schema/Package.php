@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Schema;
 
 use DWenzel\ReporterApi\Traits\JsonSerialize;
@@ -31,114 +33,61 @@ class Package
         'version',
         'sourceReference',
     ];
-    /**
-     * @var string
-     */
-    protected $name = '';
 
-    /**
-     * @var string
-     */
-    protected $version = '';
-
-    /**
-     * @var string
-     */
-    protected $type = '';
-
-    /**
-     * @var string
-     */
-    protected $sourceReference = '';
-
-    protected $source;
+    protected string $type = '';
 
     public function __construct(
-        string $name = '',
-        string $version = '',
-        string $sourceReference = ''
-    ) {
-        $this->name = $name;
-        $this->version = $version;
-        $this->sourceReference = $sourceReference;
-        $this->source = new NullPackageSource();
-    }
+        protected string $name = '',
+        protected string $version = '',
+        protected string $sourceReference = '',
+        protected PackageSource $source = new NullPackageSource()
+    ) {}
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param string $version
-     */
     public function setVersion(string $version): void
     {
         $this->version = $version;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
     public function setType(string $type): void
     {
         $this->type = $type;
     }
 
-    /**
-     * @return PackageSource
-     */
     public function getSource(): PackageSource
     {
         return $this->source;
     }
 
-    /**
-     * @param PackageSource $source
-     */
     public function setSource(PackageSource $source): void
     {
         $this->source = $source;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceReference(): string
     {
         return $this->sourceReference;
     }
 
-    /**
-     * @param string $sourceReference
-     */
     public function setSourceReference(string $sourceReference): void
     {
         $this->sourceReference = $sourceReference;

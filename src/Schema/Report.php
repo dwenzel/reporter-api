@@ -2,10 +2,8 @@
 
 namespace DWenzel\ReporterApi\Schema;
 
-use DWenzel\ReporterApi\Schema\ApplicationStatus;
 use DWenzel\ReporterApi\Traits\JsonSerialize;
 use DWenzel\ReporterApi\Traits\ToArray;
-use JsonSerializable;
 
 /***************************************************************
  *  Copyright notice
@@ -23,9 +21,10 @@ use JsonSerializable;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class Report implements JsonSerializable
+class Report implements \JsonSerializable
 {
-    use ToArray, JsonSerialize;
+    use ToArray;
+    use JsonSerialize;
 
     public const SERIALIZABLE_PROPERTIES = [
         'applicationId',
@@ -33,7 +32,7 @@ class Report implements JsonSerializable
         'status' ,
         'packages' ,
         'repositories' ,
-        'tags'
+        'tags',
     ];
     protected $applicationId = 0;
     protected $name = '';

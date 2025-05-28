@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\ReporterApi\Schema;
 
 use MyCLabs\Enum\Enum;
@@ -22,9 +23,9 @@ use MyCLabs\Enum\Enum;
 
 class ApplicationStatus extends Enum
 {
-    const __default = self::UNKNOWN;
-    const UNKNOWN = 'unknown';
-    const OK = 'ok';
-    const ERROR = 'error';
-    const WARNING = 'warning';
+    public const __default = self::UNKNOWN;
+    public const UNKNOWN = 'unknown';
+    public const OK = 'ok';
+    public const ERROR = 'error';
+    public const WARNING = 'warning';
 }

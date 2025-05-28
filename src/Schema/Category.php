@@ -23,11 +23,12 @@ use DWenzel\ReporterApi\Traits\ToArray;
  ***************************************************************/
 class Category
 {
-    use JsonSerialize, ToArray;
+    use JsonSerialize;
+    use ToArray;
 
     protected const SERIALIZABLE_PROPERTIES = [
         'id',
-        'name'
+        'name',
     ];
 
     /**

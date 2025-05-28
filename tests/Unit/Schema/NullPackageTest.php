@@ -37,7 +37,7 @@ class NullPackageTest extends UnitTestCase
 
     public function testGetNameReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -47,7 +47,7 @@ class NullPackageTest extends UnitTestCase
     {
         $name = 'bas';
         $this->subject->setName($name);
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -55,7 +55,7 @@ class NullPackageTest extends UnitTestCase
 
     public function testTypeReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getType()
         );
@@ -65,7 +65,7 @@ class NullPackageTest extends UnitTestCase
     {
         $type = 'zut';
         $this->subject->setType($type);
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getType()
         );
@@ -73,7 +73,7 @@ class NullPackageTest extends UnitTestCase
 
     public function testGetSourceReturnsNullPackage(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             NullPackageSource::class,
             $this->subject->getSource()
         );
@@ -84,7 +84,7 @@ class NullPackageTest extends UnitTestCase
         $source = new PackageSource();
         $this->subject->setSource($source);
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             NullPackageSource::class,
             $this->subject->getSource()
         );

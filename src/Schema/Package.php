@@ -23,12 +23,13 @@ use DWenzel\ReporterApi\Traits\ToArray;
  ***************************************************************/
 class Package
 {
-    use ToArray, JsonSerialize;
+    use ToArray;
+    use JsonSerialize;
 
-    const SERIALIZABLE_PROPERTIES = [
+    public const SERIALIZABLE_PROPERTIES = [
         'name',
         'version',
-        'sourceReference'
+        'sourceReference',
     ];
     /**
      * @var string
@@ -55,8 +56,8 @@ class Package
     public function __construct(
         string $name = '',
         string $version = '',
-        string $sourceReference = '')
-    {
+        string $sourceReference = ''
+    ) {
         $this->name = $name;
         $this->version = $version;
         $this->sourceReference = $sourceReference;

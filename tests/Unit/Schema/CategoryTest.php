@@ -35,7 +35,7 @@ class CategoryTest extends UnitTestCase
 
     public function testGetIdInitiallyReturnsZero(): void
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->subject->getId()
         );
@@ -46,7 +46,7 @@ class CategoryTest extends UnitTestCase
         $id = 1234;
         $this->subject->setId($id);
 
-        $this->assertSame(
+        self::assertSame(
             $id,
             $this->subject->getId()
         );
@@ -54,7 +54,7 @@ class CategoryTest extends UnitTestCase
 
     public function testGetNameInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -65,7 +65,7 @@ class CategoryTest extends UnitTestCase
         $name = 'pu';
         $this->subject->setName($name);
 
-        $this->assertSame(
+        self::assertSame(
             $name,
             $this->subject->getName()
         );

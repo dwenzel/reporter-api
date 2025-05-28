@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\ReporterApi\Http;
+
 /***************************************************************
  * Copyright notice
  * This code was ported from the now abandoned package
@@ -40,7 +41,7 @@ class Stream implements StreamInterface
      *
      * @var resource|null
      */
-    private $stream = null;
+    private $stream;
 
     /**
      * @param resource|string|mixed $stream
@@ -177,7 +178,7 @@ class Stream implements StreamInterface
             throw new \RuntimeException('Stream is not open.');
         }
 
-        if (0 > fseek($this->stream, $offset, $whence)) {
+        if (fseek($this->stream, $offset, $whence) < 0) {
             throw new \RuntimeException(
                 sprintf('Failed to seek to offset %s.', $offset)
             );

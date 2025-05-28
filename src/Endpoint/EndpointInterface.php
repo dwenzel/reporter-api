@@ -20,7 +20,4 @@ use Psr\Http\Server\RequestHandlerInterface;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-interface EndpointInterface extends RequestHandlerInterface
-{
-
-}
+interface EndpointInterface extends RequestHandlerInterface {}

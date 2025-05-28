@@ -23,12 +23,13 @@ use DWenzel\ReporterApi\Traits\ToArray;
  ***************************************************************/
 class PackageSource
 {
-    use ToArray, JsonSerialize;
+    use ToArray;
+    use JsonSerialize;
 
-    const SERIALIZABLE_PROPERTIES = [
+    public const SERIALIZABLE_PROPERTIES = [
         'url',
         'type',
-        'reference'
+        'reference',
     ];
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\ReporterApi\Http;
+
 /***************************************************************
  * Copyright notice
  * This code was ported from the now abandoned package
@@ -104,14 +105,14 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * @var int
      */
-    protected $statusCode = null;
+    protected $statusCode;
 
     /**
      * HTTP reason phrase.
      *
      * @var string
      */
-    protected $reasonPhrase = null;
+    protected $reasonPhrase;
 
     /**
      * @param StreamInterface|resource|string $body
@@ -122,8 +123,7 @@ class Response extends AbstractMessage implements ResponseInterface
         $body = '',
         int $statusCode = 200,
         array $headers = []
-    )
-    {
+    ) {
         $this->body = $this->filterBody($body);
         $this->headers = $this->filterHeaders($headers);
         $this->statusCode = $this->filterStatusCode($statusCode);

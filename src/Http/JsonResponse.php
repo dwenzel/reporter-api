@@ -32,8 +32,7 @@ class JsonResponse extends Response
         $body = '',
         int $statusCode = 200,
         array $headers = []
-    )
-    {
+    ) {
         $json = json_encode($body);
         if ($json === false) {
             throw new \RuntimeException('Failed to encode data as JSON.');

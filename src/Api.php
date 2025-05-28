@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DWenzel\ReporterApi;
@@ -31,11 +32,10 @@ use Psr\Http\Server\RequestHandlerInterface;
  ***************************************************************/
 class Api implements MiddlewareInterface
 {
-
     public const DEFAULT_ROUTE = '/api/reporter/v1/application/report';
 
     protected $endpointMap = [
-        self::DEFAULT_ROUTE => Report::class
+        self::DEFAULT_ROUTE => Report::class,
     ];
 
     /**
@@ -43,9 +43,7 @@ class Api implements MiddlewareInterface
      */
     private $endpointCache = [];
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * @return mixed
@@ -74,8 +72,7 @@ class Api implements MiddlewareInterface
      */
     private function getInstance($className)
     {
-        if (!in_array(EndpointInterface::class, class_implements($className), true))
-        {
+        if (!in_array(EndpointInterface::class, class_implements($className), true)) {
             $message = 'Invalid class %s. Class must implement ' . EndpointInterface::class . '.';
             throw new InvalidClass(
                 sprintf($message, $className),
@@ -117,8 +114,7 @@ class Api implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (($endpoint = $this->determineEndpoint($request)) instanceof NullEndpoint)
-        {
+        if (($endpoint = $this->determineEndpoint($request)) instanceof NullEndpoint) {
             return $handler->handle($request);
         }
 

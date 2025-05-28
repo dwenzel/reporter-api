@@ -1,15 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DWenzel\ReporterApi\Endpoint;
 
-use DWenzel\ReporterApi\Http\JsonResponse;
 use CPSIT\Auditor\BundleDescriber;
 use CPSIT\Auditor\Reflection\PackageVersions;
+use DWenzel\ReporterApi\Http\JsonResponse;
 use DWenzel\ReporterApi\Schema\Package;
+use DWenzel\ReporterApi\Schema\Report as ReportSchema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use DWenzel\ReporterApi\Schema\Report as ReportSchema;
 
 /***************************************************************
  *  Copyright notice

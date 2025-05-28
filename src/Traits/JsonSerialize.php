@@ -25,7 +25,7 @@ trait JsonSerialize
     /**
      * Returns an array representation of the object
      *
-     * @param integer $depth maximum tree depth
+     * @param int $depth maximum tree depth
      * @param array $mapping An array with keys for each model
      * which should be mapped.
      * @return array

@@ -2,8 +2,6 @@
 
 namespace DWenzel\ReporterApi\Traits;
 
-use ReflectionClass;
-
 /**
  * Trait ToArrayTrait
  */
@@ -12,7 +10,7 @@ trait ToArray
     /**
      * Return the object as array
      *
-     * @param integer $depth maximum tree depth
+     * @param int $depth maximum tree depth
      * @param array $mapping An array with keys for each model
      * which should be mapped.
      * @return array
@@ -23,9 +21,9 @@ trait ToArray
             return null;
         }
         $depth = $depth - 1;
-        $className = get_class($this);
+        $className = static::class;
         $properties = $this->getSerializableProperties($className);
-        $result = array();
+        $result = [];
         foreach ($properties as $propertyName => $propertyValue) {
             $maxDept = $depth;
 
@@ -66,10 +64,10 @@ trait ToArray
         if ($value instanceof \JsonSerializable) {
             return $value->jsonSerialize();
         }
-        if(is_iterable($value)) {
+        if (is_iterable($value)) {
             $result = [];
             foreach ($value as $key => $item) {
-                $result[$key] = $this->valueToArray($item, $treeDepth-1, $mapping);
+                $result[$key] = $this->valueToArray($item, $treeDepth - 1, $mapping);
             }
             return $result;
         }
@@ -87,7 +85,7 @@ trait ToArray
     {
         $serializableProperties = [];
         try {
-            $reflection = new ReflectionClass($className);
+            $reflection = new \ReflectionClass($className);
             if ($reflection->hasConstant('SERIALIZABLE_PROPERTIES')) {
                 foreach ($className::SERIALIZABLE_PROPERTIES as $propertyName) {
                     $accessorMethod = 'get' . ucfirst($propertyName);

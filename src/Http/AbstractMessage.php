@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Http;
 
 /***************************************************************
@@ -31,7 +33,7 @@ abstract class AbstractMessage implements MessageInterface
      *
      * @var StreamInterface
      */
-    protected $body = null;
+    protected $body;
 
     /**
      * HTTP headers.
@@ -162,7 +164,7 @@ abstract class AbstractMessage implements MessageInterface
         foreach ($this->headers as $header => $values) {
             if (strcasecmp($name, $header) === 0) {
                 $found = true;
-                foreach ((array) $value as $newValue) {
+                foreach ((array)$value as $newValue) {
                     $values[] = $newValue;
                 }
             }
@@ -253,7 +255,7 @@ abstract class AbstractMessage implements MessageInterface
     {
         foreach ($headers as $header => $values) {
             $this->validateHeader($header, $values);
-            $headers[$header] = (array) $values;
+            $headers[$header] = (array)$values;
         }
 
         return $headers;
@@ -314,7 +316,7 @@ abstract class AbstractMessage implements MessageInterface
             );
         }
 
-        foreach ((array) $values as $value) {
+        foreach ((array)$values as $value) {
             if (!is_string($value)) {
                 throw new \InvalidArgumentException(
                     sprintf(

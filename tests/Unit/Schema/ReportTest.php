@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
-use DWenzel\ReporterApi\Schema\Report;
 use DWenzel\ReporterApi\Schema\ApplicationStatus;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use DWenzel\ReporterApi\Schema\Report;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -22,21 +24,18 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class ReportTest extends UnitTestCase
+class ReportTest extends TestCase
 {
-    /**
-     * @var Report
-     */
-    protected $subject;
+    private Report $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Report();
     }
 
     public function testGetApplicationIdInitiallyReturnsZero(): void
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->subject->getApplicationId()
         );
@@ -44,7 +43,7 @@ class ReportTest extends UnitTestCase
 
     public function testGetNameInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -52,18 +51,18 @@ class ReportTest extends UnitTestCase
 
     public function testGetStatusInitiallyReturnsApplicationStatusUnknown(): void
     {
-        $this->assertSame(
-            $this->subject->getStatus()->getValue(),
-            ApplicationStatus::UNKNOWN
+        self::assertSame(
+            ApplicationStatus::UNKNOWN,
+            $this->subject->getStatus()
         );
     }
 
     public function testApplicationStatusCanBeSet(): void
     {
-        $status = ApplicationStatus::from(ApplicationStatus::OK);
+        $status = ApplicationStatus::OK;
         $this->subject->setStatus($status);
 
-        $this->assertSame(
+        self::assertSame(
             $status,
             $this->subject->getStatus()
         );
@@ -71,7 +70,7 @@ class ReportTest extends UnitTestCase
 
     public function testGetPackagesInitiallyReturnsEmptyArray(): void
     {
-        $this->assertSame(
+        self::assertSame(
             [],
             $this->subject->getPackages()
         );
@@ -81,7 +80,7 @@ class ReportTest extends UnitTestCase
     {
         $packages = ['foo'];
         $this->subject->setPackages($packages);
-        $this->assertSame(
+        self::assertSame(
             $packages,
             $this->subject->getPackages()
         );
@@ -89,7 +88,7 @@ class ReportTest extends UnitTestCase
 
     public function testGetRepositoriesInitiallyReturnsEmptyArray(): void
     {
-        $this->assertSame(
+        self::assertSame(
             [],
             $this->subject->getRepositories()
         );
@@ -100,11 +99,10 @@ class ReportTest extends UnitTestCase
         $repositories = ['bar'];
         $this->subject->setRepositories($repositories);
 
-        $this->assertSame(
+        self::assertSame(
             $repositories,
             $this->subject->getRepositories()
         );
     }
-
 
 }

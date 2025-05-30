@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\Category;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -21,21 +23,18 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class CategoryTest extends UnitTestCase
+class CategoryTest extends TestCase
 {
-    /**
-     * @var Category
-     */
-    protected $subject;
+    private Category $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Category();
     }
 
     public function testGetIdInitiallyReturnsZero(): void
     {
-        $this->assertSame(
+        self::assertSame(
             0,
             $this->subject->getId()
         );
@@ -46,7 +45,7 @@ class CategoryTest extends UnitTestCase
         $id = 1234;
         $this->subject->setId($id);
 
-        $this->assertSame(
+        self::assertSame(
             $id,
             $this->subject->getId()
         );
@@ -54,7 +53,7 @@ class CategoryTest extends UnitTestCase
 
     public function testGetNameInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -65,7 +64,7 @@ class CategoryTest extends UnitTestCase
         $name = 'pu';
         $this->subject->setName($name);
 
-        $this->assertSame(
+        self::assertSame(
             $name,
             $this->subject->getName()
         );

@@ -12,27 +12,26 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-- url: ///v0
+  - url: https://localhost:8080/api/reporter/v1/application/report
+    name: local
+    description: Local API server
 tags:
-- name: application
-  description: About the application
-  externalDocs:
-    description: Find out more
-    url: http://reporter.docs.famile-redlich.de
+  - name: application
+    description: About the application
+    externalDocs:
+      description: Find out more
+      url: http://reporter.docs.famile-redlich.de
 paths:
   /application/report:
     get:
       tags:
-      - report
+        - report
       summary: Get the application status report
       description: Multiple status values can be provided with comma separated strings
       operationId: getApplicationReport
-      parameters:
-      - name: api_key
-        in: header
-        required: true
-        schema:
-          type: string
+      security:
+        - apiKey: [ ]
+          appId: [ ]
       responses:
         200:
           description: successful operation
@@ -44,12 +43,21 @@ paths:
                   $ref: '#/components/schemas/Report'
         400:
           description: Invalid status value
-          content: {}
+          content: { }
 components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: APPLICATION-AUTHORIZATION
+    appId:
+      type: apiKey
+      in: header
+      name: X-API-IDENTIFIER
   schemas:
     Report:
       required:
-      - name
+        - name
       type: object
       properties:
         applicationId:
@@ -71,9 +79,9 @@ components:
           type: string
           description: application status
           enum:
-          - ok
-          - error
-          - warning
+            - ok
+            - error
+            - warning
         components:
           type: array
           description: Installed packages
@@ -134,8 +142,3 @@ components:
           type: string
       xml:
         name: Tag
-  securitySchemes:
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header

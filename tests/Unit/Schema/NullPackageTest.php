@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\NullPackage;
 use DWenzel\ReporterApi\Schema\NullPackageSource;
 use DWenzel\ReporterApi\Schema\PackageSource;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -23,21 +25,18 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class NullPackageTest extends UnitTestCase
+class NullPackageTest extends TestCase
 {
-    /**
-     * @var NullPackage
-     */
-    protected $subject;
+    private NullPackage $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new NullPackage();
     }
 
     public function testGetNameReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -47,7 +46,7 @@ class NullPackageTest extends UnitTestCase
     {
         $name = 'bas';
         $this->subject->setName($name);
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -55,7 +54,7 @@ class NullPackageTest extends UnitTestCase
 
     public function testTypeReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getType()
         );
@@ -65,7 +64,7 @@ class NullPackageTest extends UnitTestCase
     {
         $type = 'zut';
         $this->subject->setType($type);
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getType()
         );
@@ -73,7 +72,7 @@ class NullPackageTest extends UnitTestCase
 
     public function testGetSourceReturnsNullPackage(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             NullPackageSource::class,
             $this->subject->getSource()
         );
@@ -84,7 +83,7 @@ class NullPackageTest extends UnitTestCase
         $source = new PackageSource();
         $this->subject->setSource($source);
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             NullPackageSource::class,
             $this->subject->getSource()
         );

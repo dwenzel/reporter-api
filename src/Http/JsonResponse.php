@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Http;
 
 /***************************************************************
@@ -23,17 +25,11 @@ namespace DWenzel\ReporterApi\Http;
  ***************************************************************/
 class JsonResponse extends Response
 {
-    /**
-     * @param mixed $body Any value that can be JSON encoded.
-     * @param int $statusCode
-     * @param array $headers Array of string|string[]
-     */
     public function __construct(
-        $body = '',
+        mixed $body = '',
         int $statusCode = 200,
         array $headers = []
-    )
-    {
+    ) {
         $json = json_encode($body);
         if ($json === false) {
             throw new \RuntimeException('Failed to encode data as JSON.');

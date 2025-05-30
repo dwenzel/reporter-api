@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Http;
 
 /***************************************************************
@@ -18,6 +20,4 @@ namespace DWenzel\ReporterApi\Http;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class NullResponse extends Response
-{
-}
+class NullResponse extends Response {}

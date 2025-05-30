@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Exception;
 
 /***************************************************************
@@ -18,7 +20,4 @@ namespace DWenzel\ReporterApi\Exception;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class InvalidClass extends \Exception
-{
-
-}
+class InvalidClass extends \Exception {}

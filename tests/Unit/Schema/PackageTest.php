@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Tests\Unit\Schema;
 
 use DWenzel\ReporterApi\Schema\NullPackageSource;
 use DWenzel\ReporterApi\Schema\Package;
 use DWenzel\ReporterApi\Schema\PackageSource;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /***************************************************************
  *  Copyright notice
@@ -23,21 +25,18 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class PackageTest extends UnitTestCase
+class PackageTest extends TestCase
 {
-    /**
-     * @var Package
-     */
-    protected $subject;
+    private Package $subject;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Package();
     }
 
     public function testGetNameInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -47,7 +46,7 @@ class PackageTest extends UnitTestCase
     {
         $name = 'bas';
         $this->subject->setName($name);
-        $this->assertSame(
+        self::assertSame(
             $name,
             $this->subject->getName()
         );
@@ -55,7 +54,7 @@ class PackageTest extends UnitTestCase
 
     public function testTypeInitiallyReturnsEmptyString(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getType()
         );
@@ -65,7 +64,7 @@ class PackageTest extends UnitTestCase
     {
         $type = 'zut';
         $this->subject->setType($type);
-        $this->assertSame(
+        self::assertSame(
             $type,
             $this->subject->getType()
         );
@@ -73,7 +72,7 @@ class PackageTest extends UnitTestCase
 
     public function testGetSourceInitiallyReturnsNullPackage(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             NullPackageSource::class,
             $this->subject->getSource()
         );
@@ -84,7 +83,7 @@ class PackageTest extends UnitTestCase
         $source = new PackageSource();
         $this->subject->setSource($source);
 
-        $this->assertSame(
+        self::assertSame(
             $source,
             $this->subject->getSource()
         );

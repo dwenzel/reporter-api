@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Schema;
+
+use DWenzel\ReporterApi\Traits\JsonSerialize;
+use DWenzel\ReporterApi\Traits\ToArray;
 
 /***************************************************************
  *  Copyright notice
@@ -20,5 +25,48 @@ namespace DWenzel\ReporterApi\Schema;
  ***************************************************************/
 class Repository
 {
+    use ToArray;
+    use JsonSerialize;
 
+    public const SERIALIZABLE_PROPERTIES = [
+        'type',
+        'url',
+        'package',
+    ];
+
+    public function __construct(
+        protected string $type = '',
+        protected string $url = '',
+        protected ?Package $package = null
+    ) {}
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
+    }
+
+    public function getPackage(): ?Package
+    {
+        return $this->package;
+    }
+
+    public function setPackage(?Package $package): void
+    {
+        $this->package = $package;
+    }
 }

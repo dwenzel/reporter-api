@@ -1,3 +1,9 @@
+2025-05-30         [RELEASE] Release of reporter-api 1.0.0 (Vladimir Falcón Piva)
+2025-05-30 4ee35e3 Update reporterApi.yaml to enhance API security and local server configuration (Vladimir Falcón Piva)
+2025-05-28 5178e09 Code refactor and documentation (Vladimir Falcón Piva)
+2025-05-28 63e29cd Applied code formating (Vladimir Falcón Piva)
+2025-05-28 2b4c8c3 Update package requirements (Vladimir Falcon Piva)
+
 2025-01-XX         [RELEASE] Release of reporter-api 0.4.0 (Major Modernization)
 2025-01-XX xxxxxxx [FEATURE] Complete PHP 8.1+ modernization with breaking changes (Generated with Claude Code)
 2025-01-XX xxxxxxx [BREAKING] Minimum PHP version increased to 8.1+ (Generated with Claude Code)

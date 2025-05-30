@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Endpoint;
 
 use DWenzel\ReporterApi\Http\NullResponse;
@@ -24,7 +26,6 @@ use Psr\Http\Message\ServerRequestInterface;
  ***************************************************************/
 class NullEndpoint implements EndpointInterface
 {
-
     /**
      * Handles a request and produces a response.
      *
@@ -32,6 +33,6 @@ class NullEndpoint implements EndpointInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return new NullResponse("Bad Request", 400);
+        return new NullResponse('Bad Request', 400);
     }
 }

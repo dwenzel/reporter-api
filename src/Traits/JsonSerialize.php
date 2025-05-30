@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DWenzel\ReporterApi\Traits;
 
 use JsonSerializable;
@@ -25,19 +27,19 @@ trait JsonSerialize
     /**
      * Returns an array representation of the object
      *
-     * @param integer $depth maximum tree depth
+     * @param int $depth maximum tree depth
      * @param array $mapping An array with keys for each model
      * which should be mapped.
      * @return array
      */
-    abstract public function toArray(int $dept = 100, array $mapping = null);
+    abstract public function toArray(int $depth = 100, ?array $mapping = null): array;
 
     /**
      * Specify data which should be serialized to JSON
      * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }
